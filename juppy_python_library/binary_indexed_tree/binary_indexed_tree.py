@@ -9,7 +9,7 @@ class BinaryIndexedTree:
         self.bitdata = [0]*(n+1)
     
     def add(self, i, x):
-        """ A[i] += x """
+        """Add x to A[i] (A[i] += x) """
         assert(0 <= i < self.n)
 
         pos = i+1
