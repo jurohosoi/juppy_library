@@ -61,5 +61,6 @@ class UnionFindTree:
     def size(self, a):
         """Return the size of the group of a"""
         assert(0 <= a < self.n)
+        
         root_a = self.find_root(a)
         return -self.parent_or_size[root_a]
