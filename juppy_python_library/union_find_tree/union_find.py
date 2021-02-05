@@ -9,7 +9,7 @@ class UnionFindTree:
         # parent_or_size[V] ...
         #  if negative : V is the root of the group
         #                and the value*(-1) is the size of the tree
-        #  else        : the value is the parent of V
+        #  else        : the value is the parent vertex of V
         self.parent_or_size = [-1]*N 
     
     def find_root(self, a):
