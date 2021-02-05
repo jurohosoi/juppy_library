@@ -2,15 +2,15 @@ class UnionFindTree:
 
     __all__ = ['find_root', 'merge', 'same', 'size']
 
-    def __init__(self, N=10**6):    
-        assert(N > 0)
+    def __init__(self, n=10**6):    
+        assert(n > 0)
 
-        self.n = N # number of vertex
+        self.n = n # number of vertex
         # parent_or_size[V] ...
         #  if negative : V is the root of the group
         #                and the value*(-1) is the size of the tree
         #  else        : the value is the parent vertex of V
-        self.parent_or_size = [-1]*N 
+        self.parent_or_size = [-1]*n
     
     def find_root(self, a):
         """Find the root of a"""
