@@ -24,7 +24,7 @@ class UnionFindTree:
             pos = self.parent_or_size[pos]
         else:
             root_pos = pos
-        # Set parent of child_pos to root_pos
+        # Set the parent of child_pos to root_pos
         for child_pos in children:
             self.parent_or_size[child_pos] = root_pos
         return root_pos
