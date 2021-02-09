@@ -2,19 +2,19 @@ class UnionFindTree:
 
     __all__ = ['find_root', 'merge', 'same', 'size']
 
-    def __init__(self, n=10**6):    
-        assert(n > 0)
+    def __init__(self, maxsize=10**6):    
+        assert (maxsize > 0)
 
-        self.n = n # number of vertex
+        self.n = maxsize # number of vertex
         # parent_or_size[V] ...
         #  if negative : V is the root of the group
         #                and the value*(-1) is the size of the tree
         #  else        : the value is the parent vertex of V
-        self.parent_or_size = [-1]*n
+        self.parent_or_size = [-1]*maxsize
     
     def find_root(self, a):
         """Find the root of a"""
-        assert(0 <= a < self.n)
+        assert (0 <= a < self.n)
         
         pos = a
         children = []
@@ -33,8 +33,8 @@ class UnionFindTree:
 
     def merge(self, a, b):
         """Merge the group of a and the group of b"""
-        assert(0 <= a < self.n)
-        assert(0 <= b < self.n)
+        assert (0 <= a < self.n)
+        assert (0 <= b < self.n)
 
         root_a = self.find_root(a)
         root_b = self.find_root(b)
@@ -51,8 +51,8 @@ class UnionFindTree:
     
     def same(self, a, b):
         """See if the group of a and the group of b are the same"""
-        assert(0 <= a < self.n)
-        assert(0 <= b < self.n)
+        assert (0 <= a < self.n)
+        assert (0 <= b < self.n)
 
         root_a = self.find_root(a)
         root_b = self.find_root(b)
@@ -60,7 +60,7 @@ class UnionFindTree:
     
     def size(self, a):
         """Return the size of the group of a"""
-        assert(0 <= a < self.n)
+        assert (0 <= a < self.n)
         
         root_a = self.find_root(a)
         return -self.parent_or_size[root_a]

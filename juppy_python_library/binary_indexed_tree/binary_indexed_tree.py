@@ -2,11 +2,11 @@ class BinaryIndexedTree:
 
     __all__ = ['add', 'sumrange', 'lower_left']
 
-    def __init__(self, n):
-        assert(n > 0)
+    def __init__(self, maxsize=10**6):
+        assert (maxsize > 0)
 
-        self.n = n+1
-        self.bitdata = [0]*(n+1)
+        self.n = maxsize+1
+        self.bitdata = [0]*(maxsize+1)
     
     def add(self, i, x):
         """Add x to A[i] (A[i] += x) """
@@ -19,7 +19,7 @@ class BinaryIndexedTree:
     
     def running_total(self, i):
         """ Return sum of (A[0] ... A[i]) """
-        assert(-1<= i < self.n)
+        assert (-1<= i < self.n)
 
         if i == -1:
             return 0
