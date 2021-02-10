@@ -1,3 +1,5 @@
+import sys
+
 class SegmentTree:
 
     __all__ = ['setval', 'pointupdate', 'segquery', 'segsearch_right', 'pointgetval']
@@ -94,3 +96,27 @@ class SegmentTree:
                         func_value = down_value_trial
                         rightpos = rightpos*2 + 2
                 return rightpos - self.seg_length_half + 1
+def solve():
+    # Input
+    inp = list(map(int, sys.stdin.buffer.read().split()))
+    N, Q = inp[0], inp[1]
+    
+    SegTree = SegmentTree(n=N, idetify_elt=0, func=max)
+    SegTree.setval(inp[2:N+2])
+    output = []
+    
+    # Query
+    for i in range(0, Q):
+        T, p, q = inp[N+2 + 3*i], inp[N+2 + 3*i+1], inp[N+2 + 3*i+2]
+        if T == 1:
+            SegTree.pointupdate(p-1, q)
+        elif T == 2:
+            output.append(SegTree.segquery(p-1, q))
+        elif T == 3:
+            output.append(SegTree.segsearch_right(left=p-1, condfunc=lambda x: x >= q) + 1)
+    
+    # Output
+    print(*output, sep = '\n')
+
+if __name__ == '__main__':
+    solve()

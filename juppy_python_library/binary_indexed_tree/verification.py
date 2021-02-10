@@ -1,6 +1,6 @@
-"""
+'''
 verify : https://atcoder.jp/contests/practice2/submissions/19930088
-"""
+'''
 
 class BinaryIndexedTree:
 
@@ -13,7 +13,7 @@ class BinaryIndexedTree:
         self.bitdata = [0]*(n+1)
     
     def add(self, i, x):
-        """Add x to A[i] (A[i] += x) """
+        '''Add x to A[i] (A[i] += x) '''
         assert(0 <= i < self.n)
 
         pos = i+1
@@ -22,7 +22,7 @@ class BinaryIndexedTree:
             pos += pos&(-pos)
     
     def running_total(self, i):
-        """ Return sum of (A[0] ... A[i]) """
+        ''' Return sum of (A[0] ... A[i]) '''
         assert(-1<= i < self.n)
 
         if i == -1:
@@ -35,7 +35,7 @@ class BinaryIndexedTree:
         return returnval
 
     def sumrange(self, lo=0, hi=None):
-        """ Return sum of (A[lo] ... A[hi]) """
+        ''' Return sum of (A[lo] ... A[hi]) '''
         if lo < 0:
             raise ValueError('lo must be non-negative')
         if hi is None:
@@ -44,9 +44,9 @@ class BinaryIndexedTree:
         return self.running_total(hi) - self.running_total(lo-1)
 
     def lower_left(self, total):
-        """ Return min-index satisfying {sum(A0 ~ Ai) >= total} 
+        ''' Return min-index satisfying {sum(A0 ~ Ai) >= total} 
         only if Ai >= 0 (for all i)
-        """
+        '''
         if total < 0:
             return -1
         pos = 0

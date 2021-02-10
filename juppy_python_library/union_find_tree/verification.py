@@ -1,6 +1,6 @@
-"""
+'''
 verify : https://atcoder.jp/contests/practice2/submissions/19928267
-"""
+'''
 
 class UnionFindTree:
 
@@ -17,7 +17,7 @@ class UnionFindTree:
         self.parent_or_size = [-1]*N 
     
     def find_root(self, a):
-        """Find the root of a"""
+        '''Find the root of a'''
         assert(0 <= a < self.n)
         
         pos = a
@@ -36,7 +36,7 @@ class UnionFindTree:
 
 
     def merge(self, a, b):
-        """Merge the group of a and the group of b"""
+        '''Merge the group of a and the group of b'''
         assert(0 <= a < self.n)
         assert(0 <= b < self.n)
 
@@ -54,7 +54,7 @@ class UnionFindTree:
             return False
     
     def same(self, a, b):
-        """See if the group of a and the group of b are the same"""
+        '''See if the group of a and the group of b are the same'''
         assert(0 <= a < self.n)
         assert(0 <= b < self.n)
 
@@ -63,7 +63,7 @@ class UnionFindTree:
         return root_a == root_b
     
     def size(self, a):
-        """Return the size of the group of a"""
+        '''Return the size of the group of a'''
         assert(0 <= a < self.n)
         root_a = self.find_root(a)
         return -self.parent_or_size[root_a]
