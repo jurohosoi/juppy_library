@@ -1,5 +1,9 @@
 import sys
 
+'''
+verify : https://atcoder.jp/contests/practice2/submissions/20086949
+'''
+
 class SegmentTree:
 
     __all__ = ['setval', 'pointupdate', 'segquery', 'segsearch_right', 'pointgetval']
@@ -100,16 +104,16 @@ class SegmentTree:
 
 def solve():
     # Input
-    arg = list(map(int, sys.stdin.buffer.read().split()))
-    N, Q = arg[0], arg[1]
+    N, Q = map(int,input().split())
+    A = list(map(int,input().split()))
     
     SegTree = SegmentTree(n=N, idetify_elt=0, func=max)
-    SegTree.setval(arg[2:N+2])
+    SegTree.setval(A)
     output = []
     
     # Query
-    for i in range(0, Q):
-        T, p, q = arg[N+2 + 3*i], arg[N+2 + 3*i+1], arg[N+2 + 3*i+2]
+    for i in range(Q):
+        T, p, q = map(int,input().split())
         if T == 1:
             SegTree.pointupdate(p-1, q)
         elif T == 2:
@@ -118,7 +122,7 @@ def solve():
             output.append(SegTree.segsearch_right(left=p-1, condfunc = lambda x: x >= q) + 1)
     
     # Output
-    print(*output)
+    print(*output, sep='\n')
 
 if __name__ == '__main__':
-    main()
+    solve()
