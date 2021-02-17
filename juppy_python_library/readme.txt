@@ -1,3 +1,3 @@
-x.py            : code
-usage.ipynb     : usege (jn)
+x.py            : main code
+usage.ipynb     : how to use (jn)
 verification.py : verify (Atcoder, Codeforces , ...)
