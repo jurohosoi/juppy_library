@@ -9,7 +9,7 @@ class UnionFindTree:
     def __init__(self, N=10**6):    
         assert(N > 0)
 
-        self.n = N # number of vertex
+        self.n = N # number of nodes
         # parent_or_size[V] ...
         #  if negative : V is the root of the group
         #                and the value*(-1) is the size of the tree

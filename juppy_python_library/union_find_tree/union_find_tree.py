@@ -5,11 +5,11 @@ class UnionFindTree:
     def __init__(self, maxsize=10**6):    
         assert (maxsize > 0)
 
-        self.n = maxsize # number of vertex
+        self.n = maxsize # number of nodes
         # parent_or_size[V] ...
         #  if negative : V is the root of the group
         #                and the value*(-1) is the size of the tree
-        #  else        : the value is the parent vertex of V
+        #  else        : the value is the parent node of V
         self.parent_or_size = [-1]*maxsize
     
     def find_root(self, a):
