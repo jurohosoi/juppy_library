@@ -13,47 +13,47 @@ class Graph:
             'cost_tuple' -- (cost, node_to)
             'unweighted' -- node_to
         '''
-        self.n = maxsize # number of nodes
-        self.edges = [[] for _ in range(self.n)] # adjacency list
-        self.edgetype = edgetype # edgetype
+        self._n = maxsize # number of nodes
+        self._edges = [[] for _ in range(self._n)] # adjacency list
+        self._edgetype = edgetype # edgetype
 
     def edgeadd(self, a, b, cost=None, directed=False):
         '''Add edge
         directed   : a ---> b (cost)
         undirected : a <--> b (cost)
         '''
-        if self.edgetype == 'cost_tuple':
-            self.edges[a].append((cost, b))
+        if self._edgetype == 'cost_tuple':
+            self._edges[a].append((cost, b))
             if not directed:
-                self.edges[b].append((cost, a))
-        elif self.edgetype == 'cost_mod':
-            self.edges[a].append(cost*self.n + b)
+                self._edges[b].append((cost, a))
+        elif self._edgetype == 'cost_mod':
+            self._edges[a].append(cost*self._n + b)
             if not directed:
-                self.edges[b].append(cost*self.n + a)
-        elif self.edgetype == 'unweighted':
-            self.edges[a].append(b)
+                self._edges[b].append(cost*self._n + a)
+        elif self._edgetype == 'unweighted':
+            self._edges[a].append(b)
             if not directed:
-                self.edges[b].append(a)
+                self._edges[b].append(a)
     
     def dijkstra(self, node_start, initval=float("inf")):
         '''
         Return shoretet distance from node_start
         '''
-        dist_dijkstra = [initval]*self.n
+        dist_dijkstra = [initval]*self._n
         
-        assert (self.edgetype == 'cost_mod')
+        assert (self._edgetype == 'cost_mod')
         heapnode_dist = [node_start]
         while heapnode_dist:
             nodedist_now = heapq.heappop(heapnode_dist)
-            dist_now, node_now = divmod(nodedist_now, self.n)
+            dist_now, node_now = divmod(nodedist_now, self._n)
             
             if dist_dijkstra[node_now] != initval:
                 continue
             dist_dijkstra[node_now] = dist_now
             
-            for edge_nxt in self.edges[node_now]:
-                cost_nxt, node_nxt = divmod(edge_nxt, self.n)
+            for edge_nxt in self._edges[node_now]:
+                cost_nxt, node_nxt = divmod(edge_nxt, self._n)
                 if dist_dijkstra[node_nxt] != initval:
                     continue
-                heapq.heappush(heapnode_dist, (dist_now+cost_nxt)*self.n + node_nxt)
+                heapq.heappush(heapnode_dist, (dist_now+cost_nxt)*self._n + node_nxt)
         return dist_dijkstra

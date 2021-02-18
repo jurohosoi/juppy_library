@@ -5,28 +5,28 @@ class BinaryIndexedTree:
     def __init__(self, maxsize=10**6):
         assert (maxsize > 0)
 
-        self.n = maxsize+1
-        self.bitdata = [0]*(maxsize+1)
+        self._n = maxsize+1
+        self._bitdata = [0]*(maxsize+1)
     
     def add(self, i, x):
         '''Add x to A[i] (A[i] += x) '''
-        assert(0 <= i < self.n)
+        assert(0 <= i < self._n)
 
         pos = i+1
-        while pos < self.n:
-            self.bitdata[pos] += x
+        while pos < self._n:
+            self._bitdata[pos] += x
             pos += pos&(-pos)
     
     def running_total(self, i):
         ''' Return sum of (A[0] ... A[i]) '''
-        assert (-1<= i < self.n)
+        assert (-1<= i < self._n)
 
         if i == -1:
             return 0
         returnval = 0
         pos = i+1
         while pos:
-            returnval += self.bitdata[pos]
+            returnval += self._bitdata[pos]
             pos -= pos & (-pos)
         return returnval
 
@@ -35,7 +35,7 @@ class BinaryIndexedTree:
         if lo < 0:
             raise ValueError('lo must be non-negative')
         if hi is None:
-            hi = self.n
+            hi = self._n
 
         return self.running_total(hi) - self.running_total(lo-1)
 
@@ -46,10 +46,10 @@ class BinaryIndexedTree:
         if total < 0:
             return -1
         pos = 0
-        k = 1<<(self.n.bit_length()-1)
+        k = 1<<(self._n.bit_length()-1)
         while k > 0:
-            if pos+k < self.n and self.bitdata[pos+k] < total:
-                total -= self.bitdata[pos+k]
+            if pos+k < self._n and self._bitdata[pos+k] < total:
+                total -= self._bitdata[pos+k]
                 pos += k
             k //= 2
         return pos
