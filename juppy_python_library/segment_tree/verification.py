@@ -1,15 +1,15 @@
 import sys
 
-'''
+"""
 verify : https://atcoder.jp/contests/practice2/submissions/20241413
-'''
+"""
 
 class SegmentTree:
 
     __all__ = ['setval', 'pointupdate', 'segquery', 'segsearch_right', 'pointgetval']
 
     def __init__(self, n=10**6, idetify_elt=-10**9, func=max):
-        assert (func(idetify_elt, idetify_elt) == idetify_elt)
+
         self._n = n
         self._seg_length_half = 2**(n-1).bit_length()
         self._idetify_elt = idetify_elt
@@ -17,8 +17,8 @@ class SegmentTree:
         self._func = func
 
     def setval(self, x_list):
-        '''Set value : A = x_list'''
-        assert (len(x_list) == self._n)
+        """Set value : A = x_list"""
+
         # Set value at the bottom
         for i in range(self._n):
             self._seg[i+self._seg_length_half-1] = x_list[i]    
@@ -27,7 +27,7 @@ class SegmentTree:
             self._seg[i] = self._func(self._seg[2*i+1], self._seg[2*i+2])
     
     def pointupdate(self, k, x):
-        '''Update : A[k] = x '''
+        """Update : A[k] = x """
         pos = k + self._seg_length_half - 1
         # Set value at k-th
         self._seg[pos] = x
@@ -37,11 +37,11 @@ class SegmentTree:
             self._seg[pos] = self._func(self._seg[pos*2+1], self._seg[pos*2+2])
     
     def pointgetval(self, k):
-        ''' Return A[k] '''
+        """ Return A[k] """
         return self._seg[k + self._seg_length_half - 1]
 
     def segquery(self, left, right):
-        ''' Return func(A[left], ... , A[right-1]) '''
+        """ Return func(A[left], ... , A[right-1]) """
         # if not left < right
         if right <= left:
             return self._idetify_elt
@@ -68,9 +68,9 @@ class SegmentTree:
         return func_value
 
     def segsearch_right(self, condfunc, left=0):
-        ''' Return min_i satisfying condfunc( func( A[left], ... , A[i])) 
+        """ Return min_i satisfying condfunc( func( A[left], ... , A[i])) 
         if impossible : return n
-        '''
+        """
         # if impossible (ie. condfunc( func( A[left], ... , A[-1])) is False)
         if not condfunc(self.segquery(left, self._n)):
             return self._n

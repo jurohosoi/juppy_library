@@ -1,20 +1,18 @@
-'''
+"""
 verify : https://atcoder.jp/contests/practice2/submissions/20241470
-'''
+"""
 
 class BinaryIndexedTree:
 
     __all__ = ['add', 'sumrange', 'lower_left']
 
     def __init__(self, maxsize=10**6):
-        assert (maxsize > 0)
 
         self._n = maxsize+1
         self._bitdata = [0]*(maxsize+1)
     
     def add(self, i, x):
-        '''Add x to A[i] (A[i] += x) '''
-        assert(0 <= i < self._n)
+        """Add x to A[i] (A[i] += x) """
 
         pos = i+1
         while pos < self._n:
@@ -22,8 +20,7 @@ class BinaryIndexedTree:
             pos += pos&(-pos)
     
     def running_total(self, i):
-        ''' Return sum of (A[0] ... A[i]) '''
-        assert (-1<= i < self._n)
+        """ Return sum of (A[0] ... A[i]) """
 
         if i == -1:
             return 0
@@ -35,7 +32,7 @@ class BinaryIndexedTree:
         return returnval
 
     def sumrange(self, lo=0, hi=None):
-        ''' Return sum of (A[lo] ... A[hi]) '''
+        """ Return sum of (A[lo] ... A[hi]) """
         if lo < 0:
             raise ValueError('lo must be non-negative')
         if hi is None:
@@ -44,9 +41,9 @@ class BinaryIndexedTree:
         return self.running_total(hi) - self.running_total(lo-1)
 
     def lower_left(self, total):
-        ''' Return min-index satisfying {sum(A0 ~ Ai) >= total} 
+        """ Return min-index satisfying {sum(A0 ~ Ai) >= total} 
         only if Ai >= 0 (for all i)
-        '''
+        """
         if total < 0:
             return -1
         pos = 0

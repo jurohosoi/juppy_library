@@ -3,7 +3,7 @@ import heapq
 class Graph:
     
     def __init__(self, maxsize=10**6, edgetype='cost_tuple'):
-        '''
+        """
         nodes : 0, 1, 2, ... , n-1
 
         edges[node_from] describes edges from node_from
@@ -12,16 +12,16 @@ class Graph:
             'cost_mod'   -- cost*n + node_to
             'cost_tuple' -- (cost, node_to)
             'unweighted' -- node_to
-        '''
+        """
         self._n = maxsize # number of nodes
         self._edges = [[] for _ in range(self._n)] # adjacency list
         self._edgetype = edgetype # edgetype
 
     def edgeadd(self, a, b, cost=None, directed=False):
-        '''Add edge
+        """Add edge
         directed   : a ---> b (cost)
         undirected : a <--> b (cost)
-        '''
+        """
         if self._edgetype == 'cost_tuple':
             self._edges[a].append((cost, b))
             if not directed:
@@ -36,12 +36,11 @@ class Graph:
                 self._edges[b].append(a)
     
     def dijkstra(self, node_start, initval=float("inf")):
-        '''
+        """
         Return shoretet distance from node_start
-        '''
+        """
+
         dist_dijkstra = [initval]*self._n
-        
-        assert (self._edgetype == 'cost_mod')
         heapnode_dist = [node_start]
         while heapnode_dist:
             nodedist_now = heapq.heappop(heapnode_dist)
