@@ -10,10 +10,10 @@ class SegmentTree:
 
     def __init__(self, n=10**6, idetify_elt=-10**9, func=max):
 
-        self._n = n
-        self._seg_length_half = 2**(n-1).bit_length()
-        self._idetify_elt = idetify_elt
-        self._seg = [idetify_elt]*(2*self._seg_length_half)
+        self._n = n # number of elements
+        self._seg_length_half = 2**(n-1).bit_length() # number of bottom nodes
+        self._idetify_elt = idetify_elt # idetify element, unit
+        self._seg = [idetify_elt]*(2*self._seg_length_half) # segment tree val
         self._func = func
 
     def setval(self, x_list):
