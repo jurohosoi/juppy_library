@@ -1,15 +1,14 @@
-import io, os, heapq
-input = io.BytesIO(os.read(0,os.fstat(0).st_size)).readline
+import heapq
 
 R, C = map(int,input().split())
-N = R*C
+N = 2*R*C
 
 edge = [[] for i in range(N)]
 for i in range(R):
     a = list(map(int,input().split()))
     for j in range(C-1):
-        edge[i*C + j].append((a[j]<<20) + i*C + j+1)
-        edge[i*C + j+1].append((a[j]) + i*C + j)
+        edge[i*C + j].append(a[j]*N + i*C + j+1)
+        edge[i*C + j+1].append(a[j]*N + i*C + j)
 
 for i in range(R-1):
     b = list(map(int,input().split()))
@@ -18,8 +17,10 @@ for i in range(R-1):
 
 for i in range(R):
     for j in range(C):
-        for k in range(1, i+1):
-            edge[i*C + j].append((1+k) * N + (i-k)*C + j)
+        edge[i*C + j + R*C].append(i*C + j)
+        if i > 0:
+            edge[i*C + j].append(2 * N + (i-1)*C + j + R*C)
+            edge[i*C + j + R*C].append(N + (i-1)*C + j + R*C)
 
 dist = [-1]*N
 goal = (R-1)*C + (C-1)
